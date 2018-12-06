@@ -1,4 +1,21 @@
 # Release Notes
+## 2.0.82.0
+added subscriptions on margin, chat, notification, wallet, funding
+
+## 2.0.79.0
+added subscriptions on liquidations and executions
+
+## 2.0.70.0
+fixed #24
+changed TradeBucketedDto due to chance having nulls in OHLC
+
+## 2.0.67.0
+decomissioning contigency type https://blog.bitmex.com/api_announcement/deprecation-of-contingent-orders/
+
+## 2.0.66.0
+got rig of simple* in orders, executions and positions due to https://blog.bitmex.com/api_announcement/deprecation-of-simpleorderqty-functionality/
+made order Qty decimal in request model to place orders on the all symbols and indexes when quantity step less than 0
+
 ## 2.0.64.0
 added events on close and error
 got rid of usage of obsolete method in tests

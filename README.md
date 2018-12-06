@@ -3,9 +3,7 @@
 Wrapper for BitMEX.com REST API
 
 ## Issue reporting
-Recently Bitmex API has been changed. Now it requires the NONCE value in seconds rather than milliseconds plus authentification headers have been changed for REST and WebSocket both. It would be much appreciated if the community raised a bug in the repository to fix it immediately.
-From my side, I will try to schedule the integration tests to be aware of the changes in API and such crucial things as authentification
-
+Feel free to report any bugs/issues you may find in the framework. It's all much appreciated!
 
 ## Quick Start
 
@@ -95,41 +93,6 @@ var result = await bitmexApiService.Execute(new ApiActionAttributes<SomeJsonPara
 // if the method returns an array of objects
 var result = await bitmexApiService.Execute(new ApiActionAttributes<SomeJsonParams, List<AResult>>("anApiMethod", HttpMethods.POST), new SomeJsonParams(){Symbol = "XBTUSD"});
 ```
-
-
-## Progress
-The following methods were implemented and covered with the ![integration tests](/Bitmex.NET.IntegrationTests)
-
-
-Method|REST API Method
-------------|------------
-GET|execution
-GET|execution/tradeHistory
-GET|instrument
-GET|instrument/active
-GET|instrument/activeAndIndices
-GET|instrument/activeIntervals
-GET|instrument/compositeIndex
-GET|instrument/indices
-GET |order
-PUT |order
-POST |order
-DELETE |order
-DELETE |order/all
-PUT |order/bulk
-POST |order/bulk
-POST |order/cancelAllAfter
-POST |order/closePosition
-GET |orderBook/L2|yes
-GET |position|yes
-POST |position/isolate
-POST |position/leverage
-POST |position/riskLimit
-POST |position/transferMargin
-GET |quote
-GET |quote/bucketed
-GET |trade
-GET |trade/bucketed
 
 
 ## Docs

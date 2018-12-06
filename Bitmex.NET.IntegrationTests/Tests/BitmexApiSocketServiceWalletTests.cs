@@ -10,44 +10,41 @@ namespace Bitmex.NET.IntegrationTests.Tests
 {
     [TestClass]
     [TestCategory("WebSocket")]
-    public class BitmexApiSocketServiceUnsubscribeTests : BaseBitmexIntegrationTests<IBitmexApiSocketService>
+    public class BitmexApiSocketServiceWalletTests : BaseBitmexSocketIntegrationTests
     {
         [TestMethod]
-        public void should_unsubscribe()
+        public void should_subscribe_on_wallet()
         {
             try
             {
                 // arrange
                 var connected = Sut.Connect();
-                IEnumerable<InstrumentDto> dto = null;
+                IEnumerable<WalletDto> dtos = null;
                 var dataReceived = new ManualResetEvent(false);
-                var subscription = BitmetSocketSubscriptions.CreateInstrumentSubsription(a =>
+                var subscription = BitmetSocketSubscriptions.CreateWalletSubscription(a =>
                 {
-                    dto = a.Data;
+                    dtos = a.Data;
                     dataReceived.Set();
                 });
-                Sut.Subscribe(subscription);
-                var received = dataReceived.WaitOne(TimeSpan.FromSeconds(5));
 
-                // intermediate assert
+                Subscription = subscription;
+                // act
+
+                Sut.Subscribe(subscription);
+                var received = dataReceived.WaitOne(TimeSpan.FromSeconds(20));
+
+                // assert
                 // no exception raised
                 connected.Should().BeTrue();
                 received.Should().BeTrue();
-                dto.Should().NotBeNull();
-                dto.Count().Should().BeGreaterThan(0);
-
-
-                // act
-                Sut.Unsubscribe(subscription);
-
-                // assert
-                // no exceptions raised
-
+                dtos.Should().NotBeNull();
+                dtos.Count().Should().BeGreaterThan(0);
             }
             catch (BitmexWebSocketLimitReachedException)
             {
                 Assert.Inconclusive("connection limit reached");
             }
         }
+
     }
 }

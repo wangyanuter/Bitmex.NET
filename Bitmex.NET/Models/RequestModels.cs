@@ -99,12 +99,12 @@ namespace Bitmex.NET.Models
         /// Number of results to fetch.
         /// </summary>
         [DisplayName("count")]
-        public decimal Count { get; set; }
+        public int Count { get; set; }
         /// <summary>
         /// Starting ID for results.
         /// </summary>
         [DisplayName("start")]
-        public decimal Start { get; set; }
+        public long Start { get; set; }
         /// <summary>
         /// If true, will sort results newest first.
         /// </summary>
@@ -114,7 +114,7 @@ namespace Bitmex.NET.Models
         /// Channel id. GET /chat/channels for ids. Leave blank for all.
         /// </summary>
         [DisplayName("channelID")]
-        public decimal ChannelID { get; set; }
+        public long ChannelID { get; set; }
     }
     /// <summary>
     /// Send message to Chat
@@ -130,8 +130,9 @@ namespace Bitmex.NET.Models
         /// Channel to post to. Default 1 (English).
         /// </summary>
         [JsonProperty("channelID")]
-        public decimal ChannelID { get; set; }
+        public long ChannelID { get; set; }
     }
+
     /// <summary>
     /// Get all raw executions for your account
     /// </summary>
@@ -493,20 +494,13 @@ namespace Bitmex.NET.Models
         [JsonProperty("clOrdID")]
         public string ClOrdID { get; set; }
         /// <summary>
-        /// Optional order quantity in units of the underlying instrument (i.e. Bitcoin).
-        /// </summary>
-        [JsonProperty("simpleOrderQty")]
-        public decimal? SimpleOrderQty { get; set; }
-        /// <summary>
         /// Optional order quantity in units of the instrument (i.e. contracts).
         /// </summary>
         [JsonProperty("orderQty")]
         public decimal? OrderQty { get; set; }
-        /// <summary>
-        /// Optional leaves quantity in units of the underlying instrument (i.e. Bitcoin). Useful for amending partially filled orders.
-        /// </summary>
-        [JsonProperty("simpleLeavesQty")]
-        public decimal? SimpleLeavesQty { get; set; }
+
+        [JsonProperty("displayQty")]
+        public decimal? DisplayQty { get; set; }
         /// <summary>
         /// Optional leaves quantity in units of the instrument (i.e. contracts). Useful for amending partially filled orders.
         /// </summary>
@@ -550,15 +544,10 @@ namespace Bitmex.NET.Models
         [JsonProperty("side")]
         public string Side { get; set; }
         /// <summary>
-        /// Order quantity in units of the underlying instrument (i.e. Bitcoin).
-        /// </summary>
-        [JsonProperty("simpleOrderQty")]
-        public decimal? SimpleOrderQty { get; set; }
-        /// <summary>
         /// Order quantity in units of the instrument (i.e. contracts).
         /// </summary>
         [JsonProperty("orderQty")]
-        public int? OrderQty { get; set; }
+        public decimal? OrderQty { get; set; }
         /// <summary>
         /// Optional limit price for 'Limit', 'StopLimit', and 'LimitIfTouched' orders.
         /// </summary>
@@ -616,11 +605,6 @@ namespace Bitmex.NET.Models
         /// </summary>
         [JsonProperty("execInst")]
         public string ExecInst { get; set; }
-        /// <summary>  
-        /// Optional contingency type for use with clOrdLinkID.Valid options: OneCancelsTheOther, OneTriggersTheOther, OneUpdatesTheOtherAbsolute, OneUpdatesTheOtherProportional.
-        /// </summary>
-        [JsonProperty("contingencyType")]
-        public string ContingencyType { get; set; }
         /// <summary>
         /// Optional order annotation. e.g. 'Take profit on MOON!'.
         /// </summary>
